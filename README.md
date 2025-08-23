@@ -4,10 +4,10 @@ AI Exam Paper Generator For Primary School Math Teachers
 
 ## Worktree
 
-[exam-paper-generator]()
+[exam-paper-generator](https://github.com/ChetanSaini726/exam-paper-generator/tree/main)
 
-- [frontend]()
-- [backend]()
+- [frontend](https://github.com/ChetanSaini726/exam-paper-generator/tree/frontend)
+- [backend](https://github.com/ChetanSaini726/exam-paper-generator/tree/backend)
 
 ## Setup
 
