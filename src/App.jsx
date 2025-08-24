@@ -1,4 +1,4 @@
-import ExamGenerator from "../components/ExamGenerator.jsx";
+import ExamGenerator from "./components/ExamGenerator.jsx";
 
 export default function App() {
   return <ExamGenerator />;

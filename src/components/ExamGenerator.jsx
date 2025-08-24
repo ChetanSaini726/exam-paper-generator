@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useGenerateExam } from "../hooks/useGenerateExam";
+import { useGenerateExam } from "../hooks/useGenerateExam.js";
 
 export default function ExamGenerator() {
     const [topic, setTopic] = useState("");
@@ -40,7 +40,7 @@ export default function ExamGenerator() {
                 </button>
             </div>
             {isError && <div style={{ color: "red", marginTop: 12 }}>{error?.message || "Failed to generate exam. Please try again."}</div>}
-            <pre style={{ whiteSpace: "pre-wrap", background: "#f7f7f8", padding: 16, borderRadius: 8, marginTop: 16, minHeight: 200 }}>{text}</pre>
+            <pre style={{ whiteSpace: "pre-wrap", background: "#202025ff", padding: 16, borderRadius: 8, marginTop: 16, minHeight: 200 }}>{text}</pre>
         </div>
     );
 }

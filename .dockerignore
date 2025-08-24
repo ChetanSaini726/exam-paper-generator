@@ -1,0 +1,14 @@
+# Ignore dependencies and build
+node_modules/
+dist/
+
+# Ignore environment files and local configs
+.env
+.env.example
+.vscode/
+
+# Ignore logs and local debug files
+npm-debug.log*
+
+# Ignore git folder
+.git/

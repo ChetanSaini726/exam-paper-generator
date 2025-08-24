@@ -1,12 +1,15 @@
-# React + Vite
+# AI Exam Paper Generator Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Setup
 
-Currently, two official plugins are available:
+```bash
+git clone --single-branch -b frontend https://github.com/ChetanSaini726/exam-paper-generator.git ./exam-paper-generator-frontend # Clones only this branch
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+cd exam-paper-generator-frontend
 
-## Expanding the ESLint configuration
+npm i
+npm start # or 'npm run dev'
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+> [!NOTE]
+> If you want to run the whole app at once, follow `README.md` in the **main** branch.
