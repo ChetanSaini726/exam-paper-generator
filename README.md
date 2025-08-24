@@ -18,7 +18,7 @@ git worktree add ./backend backend
 npm i
 ```
 
-## Run
+## Run (Locally using npm)
 
 ```bash
 npm run build && npm start # Builds and then starts frontend
@@ -33,3 +33,9 @@ npm run server # starts backend
 > ```bash
 > npm run full # Runs both frontend and backend simultaneously
 > ```
+
+## Run (Locally using docker)
+
+```bash
+docker-compose up -d # or 'npm run docker'
+```

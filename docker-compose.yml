@@ -1,0 +1,37 @@
+
+services:
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile.prod
+      target: production
+    ports:
+      - "3010:3010"
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - backend/.env
+    restart: unless-stopped
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:3010/api/health"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 30s
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile.prod
+      target: production
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - frontend/.env
+    depends_on:
+      - backend
+      # backend:
+      #   condition: service_healthy
+    restart: unless-stopped
