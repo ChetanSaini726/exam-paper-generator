@@ -1,26 +1,25 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import { ALLOWED_ORIGINS, PORT } from "./utils/config.js"
 
-import examRoutes from "./routes/examRoutes.js";
-
-const app = express();
-
-function server(){
+async function server(){
     try {
-        app.use(cors({ origin: ALLOWED_ORIGINS }));
+        const env = (await import("./utils/config.js")).default;
+        const examRoutes = (await import("./routes/examRoutes.js")).default;
+        
+        const app = express();
+        app.use(cors({ origin: env.ALLOWED_ORIGIN }));
         app.use(express.json());
+        app.use(morgan("common"));
 
-        app.use(morgan("combined"));
 
         // POST /api/generat-exam
         app.use("/api", examRoutes);
 
-        app.listen(PORT, () => console.log(`Backend running at http://localhost:${PORT}`));
+        app.listen(env.PORT, () => console.log(`Backend running at http://localhost:${env.PORT}`));
     } catch (err){
         console.error("Unexpected Error Occurred: ", err);
     }
 }
 
-server();
+await server();

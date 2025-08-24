@@ -1,12 +1,13 @@
-
 import express from "express";
 import { GoogleGenAI } from "@google/genai";
-import {MODEL_NAME, GEMINI_API_KEY, gemini_config} from "../utils/config.js"
+
 const router = express.Router();
 
 router.post("/generate-exam", async (req, res) => {
     try {
-        if (!MODEL_NAME || !GEMINI_API_KEY){
+        const env = (await import("../utils/config.js")).default;
+        
+        if (!env.MODEL_NAME || !env.GEMINI_API_KEY){
             console.log("Either MODEL_NAME or GEMINI_API_KEY environment variables are not set!");
             return res.status(500).json({error: "Server not configured properly"});
         }
@@ -21,13 +22,15 @@ router.post("/generate-exam", async (req, res) => {
         res.setHeader("Cache-Control", "no-cache");
         res.setHeader("Connection", "keep-alive");
 
-        const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+        const ai = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
         const prompt = `Generate a math exam for a primary school student with ${count} questions on the topic of ${topic}.`;
         
         const response = await ai.models.generateContentStream({
-            model: MODEL_NAME,
+            model: env.MODEL_NAME,
             contents: prompt,
-            config: gemini_config
+            config: {
+                systemInstruction: env.GEMINI_SYSTEM_INSTRUCTION
+            }
         });
         
         for await (const chunk of response) {
