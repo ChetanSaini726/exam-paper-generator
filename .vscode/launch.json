@@ -1,0 +1,48 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Backend (dev)",
+      "runtimeExecutable": "nodemon",
+      "args": [
+        "src/server.js"
+      ],
+      "restart": true,
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Frontend (dev)",
+      "runtimeExecutable": "vite",
+      "cwd": "${workspaceFolder}/frontend",
+      "console": "integratedTerminal",
+      "serverReadyAction": {
+        "pattern": "Local:   (http://localhost:[0-9]+)",
+        "action": "startDebugging",
+        "name": "Launch Chrome (Guest)"
+      }
+    },
+    {
+      "name": "Launch Chrome (Guest)",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/frontend",
+      "runtimeArgs": ["--guest"]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack (dev)",
+      "configurations": ["Backend (dev)", "Frontend (dev)"],
+      "stopAll": true
+    }
+  ]
+}
