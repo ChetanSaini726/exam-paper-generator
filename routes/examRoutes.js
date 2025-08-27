@@ -11,7 +11,7 @@ router.post("/generate-exam", async (req, res) => {
             console.log("Either MODEL_NAME or GEMINI_API_KEY environment variables are not set!");
             return res.status(500).json({error: "Server not configured properly"});
         }
-        const { topic, count } = req.body;
+        const { topic, count, withAnswers } = req.body;
 
         if (!topic || !count || isNaN(count)) {
             return res.status(400).json({ error: "Invalid topic or count!" });
@@ -23,8 +23,9 @@ router.post("/generate-exam", async (req, res) => {
         res.setHeader("Connection", "keep-alive");
 
         const ai = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
-        const prompt = `Generate a math exam for a primary school student with ${count} questions on the topic of ${topic}.`;
-        
+        let prompt = `Generate a math exam for a primary school student with ${count} questions on the topic of ${topic}.`;
+        if (withAnswers)
+            prompt+= `Generate answers for the same too, but separately after generating all the questions.`;
         const response = await ai.models.generateContentStream({
             model: env.MODEL_NAME,
             contents: prompt,
