@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
-async function streamExamRequest({ topic, count, onChunk }) {
+async function streamExamRequest({ topic, count, withAnswers, onChunk }) {
     const env = (await import("../utils/config.js")).default;
     const res = await fetch(`${env.API_BASE_URL}/api/generate-exam`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic, count })
+        body: JSON.stringify({ topic, count, withAnswers })
     });
     
     if (!res.body) throw new Error("No stream");
@@ -33,10 +33,11 @@ async function streamExamRequest({ topic, count, onChunk }) {
 export function useGenerateExam() {
     const [text, setText] = useState("");
     const mutation = useMutation({
-        mutationFn: ({ topic, count }) =>
+        mutationFn: ({ topic, count, withAnswers }) =>
             streamExamRequest({
                 topic,
                 count,
+                withAnswers,
                 onChunk: chunk => setText(prev => prev + chunk)
             })
     });
